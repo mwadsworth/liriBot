@@ -6,7 +6,7 @@ var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
 var axios = require('axios');
 var request = require("request");
-// var fs = require("fs");
+var fs = require("fs");
 // var util = require("util");
 
 
@@ -44,9 +44,53 @@ function omdb(input) {
   var url = "http://www.omdbapi.com/?t=" + input + "&y=&plot=full&tomatoes=true&apikey=trilogy"
   axios.get(url).then(function(response){
     console.log(response.data);
+    axios.get(URL).then(function(response) {
+        // parse the response body (string) to a JSON object
+        var jsonData = response.data;
+        // showData ends up being the string containing the show data we will print to the console
+        var movieData = [
+          "Title: " + jsonData.title,
+          "Year: " + jsonData.year,
+          "Rating: " + jsonData.rating.average,
+          "Produced in: " + jsonData.country.name,
+          "Language: " + jsonData.summary,
+          "Plot: " + jsonData.plot,
+          "Actors: " + jsonData.actors
+        ].join("\r\n");
+  
+        // Append showData and the divider to log.txt, print showData to the console
+        fs.appendFile("log.txt", movieData + divider, function(err) {
+          if (err) throw err;
+          console.log(movieData);
+        });
+      });
   })
-
 }
+//bandsInTown
+function bandsInTown(input) {
+    var url = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
+    axios.get(url).then(function(response){
+      console.log(response.data);
+      var jsonData = response.data;
+      // showData ends up being the string containing the show data we will print to the console
+      var concertData = [
+        "venueName: " + jsonData.venue,
+        "venueLocation: " + jsonData.location, //how-to- used moment.js
+        "Date: " + jsonData.date,
+      ].join("\r\n");
+
+      // Append showData and the divider to log.txt, print showData to the console
+      fs.appendFile("log.txt", concertData + divider, function(err) {
+        if (err) throw err;
+        console.log(concertData);
+      });
+    });
+//spotify 
+
+function spotify(input) {
+    var url = ""
+}
+
 
 //calling functions
 liri(command, input)
@@ -61,10 +105,6 @@ liri(command, input)
 
 //what each command should do//
 
-//Spotify functions//
 
 
-//Omdb functions//
-
-//BandsInTown functions//
 
