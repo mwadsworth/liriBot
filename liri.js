@@ -8,7 +8,7 @@ var axios = require('axios');
 var request = require("request");
 var fs = require("fs");
 
-
+console.log(keys);
 
 var spotify = new Spotify(keys.spotify);
 //user input variables
@@ -67,53 +67,53 @@ function bandsInTown(input) {
     };
 
 //spotify 
-// if (process.argv[4] === undefined || process.argv[4] === null) {
-//     var song = process.argv[3];
-//     // console.log(song);
+if (process.argv[4] === undefined || process.argv[4] === null) {
+    var song = process.argv[3];
+    // console.log(song);
 
-// } else if (process.argv[4] !== undefined || process.argv[4] !== null) {
-//     var song = process.argv[3] + ' ' + process.argv[4];
-//     // console.log(song);
+} else if (process.argv[4] !== undefined || process.argv[4] !== null) {
+    var song = process.argv[3] + ' ' + process.argv[4];
+    // console.log(song);
     
-// } else {
-//     console.log('Please enter a valid song');
+} else {
+    console.log('Please enter a valid song');
     
-// }
+}
 
 
-// var spotify = new Spotify(keys.spotifyKeys);
+//var spotify = new Spotify(keys.spotifyKeys);
 
-// // Get Spotify songs function
-// function getSpotifySong(song) {
-//     if (song === undefined || song === null) {
-//         song = 'The Sign';
-//     } else {
+// Get Spotify songs function
+function getSpotifySong(song) {
+    if (song === undefined || song === null) {
+        song = 'The Sign';
+    } else {
         
-//     }
+    }
 
-//     spotify
-//     .search({ type: 'track', query: song, limit: 1 })
-//     .then(function(response) {
+    spotify
+    .search({ type: 'track', query: song, limit: 1 })
+    .then(function(response) {
         
-//         console.log(`####################
-//         Song: ${song} 
+        console.log(`####################
+        Song: ${song} 
         
-//         Artist: ${response.tracks.items[0].album.artists[0].name}
+        Artist: ${response.tracks.items[0].album.artists[0].name}
         
-//         Album: ${response.tracks.items[0].album.name}
-//         Preview URL: ${response.tracks.items[0].preview_url} `);
+        Album: ${response.tracks.items[0].album.name}
+        Preview URL: ${response.tracks.items[0].preview_url} `);
         
 
 
-//     })
-//     .catch(function(err) {
-//       console.log(err);
-//     });
-// };
-
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
+};
 
 //calling functions
 liri(command, input)
+
 
 
 
